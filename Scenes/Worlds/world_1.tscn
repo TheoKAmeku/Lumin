@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://b008hhjvjp587"]
+
+[ext_resource type="PackedScene" uid="uid://c662v27l0g0e5" path="res://Scenes/player.tscn" id="1_0qc64"]
+[ext_resource type="PackedScene" uid="uid://ryqywekj6vkr" path="res://Scenes/platform.tscn" id="2_lsa5t"]
+[ext_resource type="PackedScene" uid="uid://n0kywwyb33od" path="res://Scenes/moving_platform.tscn" id="3_a5qwf"]
+[ext_resource type="PackedScene" uid="uid://dol04xtsf0yns" path="res://Scenes/win_entity.tscn" id="4_6pb4i"]
+[ext_resource type="FontFile" uid="uid://bo05sf2pvb641" path="res://Assests/fonts/Xolonium-Regular.ttf" id="5_i0u3b"]
+
+[sub_resource type="Curve2D" id="Curve2D_5nsto"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1585, -30)
+}
+point_count = 2
+
+[node name="World1" type="Node2D"]
+self_modulate = Color(1, 0, 0, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_0qc64")]
+position = Vector2(561, 305)
+
+[node name="Platform" parent="." instance=ExtResource("2_lsa5t")]
+position = Vector2(390, 528)
+
+[node name="Platform2" parent="." instance=ExtResource("2_lsa5t")]
+position = Vector2(1372, 281)
+
+[node name="Platform3" parent="." instance=ExtResource("2_lsa5t")]
+position = Vector2(1386, -547)
+rotation = 1.57065
+
+[node name="Platform4" parent="." instance=ExtResource("2_lsa5t")]
+position = Vector2(3276, -1326)
+rotation = -1.54711
+
+[node name="Platform5" parent="." instance=ExtResource("2_lsa5t")]
+position = Vector2(3957, -2158)
+rotation = -1.54711
+
+[node name="Platform6" parent="." instance=ExtResource("2_lsa5t")]
+position = Vector2(2784, -2436)
+rotation = -3.14511
+
+[node name="Platform7" parent="." instance=ExtResource("2_lsa5t")]
+position = Vector2(1513, -2446)
+rotation = -3.14511
+
+[node name="Platform8" parent="." instance=ExtResource("2_lsa5t")]
+position = Vector2(144, -2426)
+rotation = -3.14511
+
+[node name="Moving_Platform" parent="." instance=ExtResource("3_a5qwf")]
+position = Vector2(1977, -534)
+curve = SubResource("Curve2D_5nsto")
+loop = false
+speed = 1.0
+
+[node name="WinEntity" parent="." instance=ExtResource("4_6pb4i")]
+position = Vector2(28, -2724)
+level_to_unlock = 2
+
+[node name="Info Label" type="Label" parent="."]
+offset_left = 164.0
+offset_top = 37.0
+offset_right = 513.0
+offset_bottom = 202.0
+theme_override_fonts/font = ExtResource("5_i0u3b")
+theme_override_font_sizes/font_size = 32
+text = "A/D: Move
+Space: Jump
+Shift: Run
+Left Click: Grapple
+Reset: R
+Zoom camera: scroll"

@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://ci40fceaqj08g"]
+
+[ext_resource type="PackedScene" uid="uid://c662v27l0g0e5" path="res://Scenes/player.tscn" id="1_nqlvl"]
+[ext_resource type="PackedScene" uid="uid://dol04xtsf0yns" path="res://Scenes/win_entity.tscn" id="2_f3vlb"]
+[ext_resource type="PackedScene" uid="uid://ryqywekj6vkr" path="res://Scenes/platform.tscn" id="3_f3vlb"]
+[ext_resource type="PackedScene" uid="uid://n0kywwyb33od" path="res://Scenes/moving_platform.tscn" id="4_65s46"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_15lct"]
+friction = 0.1
+bounce = 5.0
+
+[sub_resource type="Curve2D" id="Curve2D_f1b8o"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -1107, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_twxh6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, -1107, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
+
+[sub_resource type="Curve2D" id="Curve2D_ku3lp"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 2908, 5, 0, 0, 0, 0, 2893, -2452, 0, 0, 0, 0, -2487, -2452, 0, 0, 0, 0, -2487, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
+[node name="World4" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_nqlvl")]
+
+[node name="WinEntity" parent="." instance=ExtResource("2_f3vlb")]
+position = Vector2(-14, -1864)
+level_to_unlock = -1
+
+[node name="Platform" parent="." instance=ExtResource("3_f3vlb")]
+position = Vector2(38, -131)
+
+[node name="Platform2" parent="." instance=ExtResource("3_f3vlb")]
+modulate = Color(0.423529, 1, 1, 1)
+position = Vector2(20, 444)
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_15lct")
+
+[node name="Moving_Platform" parent="." instance=ExtResource("4_65s46")]
+position = Vector2(-1108, -124)
+curve = SubResource("Curve2D_f1b8o")
+loop = false
+
+[node name="Moving_Platform2" parent="." instance=ExtResource("4_65s46")]
+position = Vector2(1108, -128)
+curve = SubResource("Curve2D_twxh6")
+loop = false
+
+[node name="Moving_Platform3" parent="." instance=ExtResource("4_65s46")]
+position = Vector2(-2, 864)
+curve = SubResource("Curve2D_ku3lp")
+speed = 1.5

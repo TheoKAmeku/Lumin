@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://b32n406id185w"]
+
+[ext_resource type="PackedScene" uid="uid://c662v27l0g0e5" path="res://Scenes/player.tscn" id="1_xxju5"]
+[ext_resource type="PackedScene" uid="uid://ryqywekj6vkr" path="res://Scenes/platform.tscn" id="2_q7yqv"]
+[ext_resource type="PackedScene" uid="uid://dol04xtsf0yns" path="res://Scenes/win_entity.tscn" id="3_q7yqv"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_xxju5"]
+friction = 0.1
+bounce = 5.0
+
+[node name="World3" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_xxju5")]
+
+[node name="Platform" parent="." instance=ExtResource("2_q7yqv")]
+modulate = Color(0.423529, 1, 1, 1)
+position = Vector2(51, 689)
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_xxju5")
+
+[node name="Platform2" parent="." instance=ExtResource("2_q7yqv")]
+position = Vector2(39, 1310)
+
+[node name="Platform3" parent="." instance=ExtResource("2_q7yqv")]
+position = Vector2(-1117, 932)
+
+[node name="Platform4" parent="." instance=ExtResource("2_q7yqv")]
+position = Vector2(1122, 956)
+
+[node name="Platform5" parent="." instance=ExtResource("2_q7yqv")]
+position = Vector2(1960, 528)
+
+[node name="Platform7" parent="." instance=ExtResource("2_q7yqv")]
+position = Vector2(-1563, -96)
+
+[node name="Platform8" parent="." instance=ExtResource("2_q7yqv")]
+position = Vector2(2823, 14)
+
+[node name="Platform9" parent="." instance=ExtResource("2_q7yqv")]
+position = Vector2(2805, -595)
+
+[node name="Platform10" parent="." instance=ExtResource("2_q7yqv")]
+position = Vector2(1838, -917)
+
+[node name="Platform11" parent="." instance=ExtResource("2_q7yqv")]
+position = Vector2(763, -944)
+
+[node name="WinEntity" parent="." instance=ExtResource("3_q7yqv")]
+position = Vector2(5, -234)
+level_to_unlock = 4

@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://bbv5b83s58nv6"]
+
+[ext_resource type="PackedScene" uid="uid://c662v27l0g0e5" path="res://Scenes/player.tscn" id="1_p2q1k"]
+[ext_resource type="PackedScene" uid="uid://ryqywekj6vkr" path="res://Scenes/platform.tscn" id="2_5dlt7"]
+[ext_resource type="PackedScene" uid="uid://n0kywwyb33od" path="res://Scenes/moving_platform.tscn" id="3_lk403"]
+[ext_resource type="PackedScene" uid="uid://dol04xtsf0yns" path="res://Scenes/win_entity.tscn" id="4_ejy6v"]
+
+[sub_resource type="Curve2D" id="Curve2D_jh30k"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3161)
+}
+point_count = 2
+
+[node name="World2" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_p2q1k")]
+
+[node name="Platform" parent="." instance=ExtResource("2_5dlt7")]
+position = Vector2(3, 174)
+
+[node name="Platform2" parent="." instance=ExtResource("2_5dlt7")]
+position = Vector2(1118, 177)
+
+[node name="Platform3" parent="." instance=ExtResource("2_5dlt7")]
+position = Vector2(523, 766)
+
+[node name="Platform4" parent="." instance=ExtResource("2_5dlt7")]
+position = Vector2(-711, 1244)
+
+[node name="Platform5" parent="." instance=ExtResource("2_5dlt7")]
+position = Vector2(-2108, 1244)
+
+[node name="Moving_Platform" parent="." instance=ExtResource("3_lk403")]
+position = Vector2(-2768, 1764)
+curve = SubResource("Curve2D_jh30k")
+loop = false
+
+[node name="Platform6" parent="." instance=ExtResource("2_5dlt7")]
+position = Vector2(-1994, -1939)
+
+[node name="Platform7" parent="." instance=ExtResource("2_5dlt7")]
+position = Vector2(-738, -2567)
+
+[node name="Platform8" parent="." instance=ExtResource("2_5dlt7")]
+position = Vector2(588, -3003)
+
+[node name="Platform9" parent="." instance=ExtResource("2_5dlt7")]
+position = Vector2(-19, -3779)
+
+[node name="WinEntity" parent="." instance=ExtResource("4_ejy6v")]
+position = Vector2(-23, -3987)
+level_to_unlock = 3

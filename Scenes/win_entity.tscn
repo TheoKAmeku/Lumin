@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dol04xtsf0yns"]
+
+[ext_resource type="Texture2D" uid="uid://xusok4iexuoy" path="res://Assests/Diamond.png" id="1_cpagg"]
+[ext_resource type="Script" uid="uid://i801sq7byhjp" path="res://Scripts/win_entity.gd" id="1_ft212"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_ft212"]
+points = PackedVector2Array(-45, -44.5, 39.7, -44.5, 63.8, -16, -2.7, 59, -69, -16)
+
+[node name="WinEntity" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_ft212")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_cpagg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("ConvexPolygonShape2D_ft212")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ryqywekj6vkr"]
+[gd_scene load_steps=10 format=3 uid="uid://ryqywekj6vkr"]
 
 [ext_resource type="Texture2D" uid="uid://p1strabrbydy" path="res://Assests/Platforms/Normal/Plat_1.png" id="1_1rc8e"]
 [ext_resource type="Script" uid="uid://dtex2l3tqtv1v" path="res://Scripts/platform.gd" id="1_uojju"]
@@ -7,8 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://diwbrmp058uxn" path="res://Assests/Platforms/Normal/Plat_4.png" id="4_o24iv"]
 [ext_resource type="Texture2D" uid="uid://dgvn0on0lxvwy" path="res://Assests/Platforms/Normal/Plat_5.png" id="5_5g67m"]
 [ext_resource type="Texture2D" uid="uid://dp25kuxp33xf0" path="res://Assests/Platforms/Normal/Plat_6.png" id="7_o24iv"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o24iv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1rc8e"]
 size = Vector2(613, 162)
@@ -40,7 +38,6 @@ animations = [{
 }]
 
 [node name="Platform" type="StaticBody2D"]
-physics_material_override = SubResource("PhysicsMaterial_o24iv")
 script = ExtResource("1_uojju")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

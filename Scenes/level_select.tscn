@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://52iqpfq56ieg"]
+[gd_scene load_steps=3 format=3 uid="uid://52iqpfq56ieg"]
 
 [ext_resource type="Script" uid="uid://cb5wbx4k1uvj7" path="res://Scripts/level_select.gd" id="1_1fiak"]
+[ext_resource type="FontFile" uid="uid://bo05sf2pvb641" path="res://Assests/fonts/Xolonium-Regular.ttf" id="2_nkys2"]
 
-[node name="level_select" type="Control"]
+[node name="LevelSelect" type="Control"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,35 +20,73 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -31.0
-offset_top = -85.0
-offset_right = 31.0
-offset_bottom = 86.0
+offset_left = -66.0
+offset_top = -125.5
+offset_right = 66.0
+offset_bottom = 125.5
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LevelButton1" type="Button" parent="HFlowContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_nkys2")
+theme_override_font_sizes/font_size = 32
 text = "Level 1"
 
 [node name="LevelButton2" type="Button" parent="HFlowContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_nkys2")
+theme_override_font_sizes/font_size = 32
 text = "Level 2"
 
 [node name="LevelButton3" type="Button" parent="HFlowContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_nkys2")
+theme_override_font_sizes/font_size = 32
 text = "Level 3"
 
 [node name="LevelButton4" type="Button" parent="HFlowContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_nkys2")
+theme_override_font_sizes/font_size = 32
 text = "Level 4"
 
-[node name="LevelButton5" type="Button" parent="HFlowContainer"]
-layout_mode = 2
-text = "Level 5"
+[node name="UnlockMessage" type="Label" parent="."]
+visible = false
+self_modulate = Color(1, 0.06, 0.06, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -81.0
+offset_top = -23.0
+offset_right = 81.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_nkys2")
+theme_override_font_sizes/font_size = 32
+text = "Level is not unlocked"
+
+[node name="Timer" type="Timer" parent="UnlockMessage"]
+wait_time = 4.0
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 42.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_nkys2")
+theme_override_font_sizes/font_size = 32
+text = "Quit"
 
 [connection signal="pressed" from="HFlowContainer/LevelButton1" to="." method="_on_level_button_1_pressed"]
 [connection signal="pressed" from="HFlowContainer/LevelButton2" to="." method="_on_level_button_2_pressed"]
 [connection signal="pressed" from="HFlowContainer/LevelButton3" to="." method="_on_level_button_3_pressed"]
 [connection signal="pressed" from="HFlowContainer/LevelButton4" to="." method="_on_level_button_4_pressed"]
-[connection signal="pressed" from="HFlowContainer/LevelButton5" to="." method="_on_level_button_5_pressed"]
+[connection signal="timeout" from="UnlockMessage/Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

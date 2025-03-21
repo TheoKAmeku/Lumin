@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dipvqn3gnkdqo"]
+
+[ext_resource type="PackedScene" uid="uid://c662v27l0g0e5" path="res://Scenes/player.tscn" id="1_c6yxa"]
+[ext_resource type="PackedScene" uid="uid://dol04xtsf0yns" path="res://Scenes/win_entity.tscn" id="2_exww3"]
+
+[node name="World5" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_c6yxa")]
+
+[node name="WinEntity" parent="Player" instance=ExtResource("2_exww3")]
+level_to_unlock = -1
