@@ -1,12 +1,20 @@
 extends CharacterBody2D
 
-@export var speed = 300
+@export var speed = 400
 @export var gravity_force = 30
-@export var jump_force = 300
+@export var jump_force = -500
 
-#Grappling hook
+var max_fall_speed = 1500
+var can_double_jump = true
+var is_walljumping = false
+var wall_slide_speed = 2000
+
+@onready var jump_height_timer: Timer = $JumpHeightTimer
+@onready var wall_jump_timer: Timer = $WallJumpTimer
 @onready var hook_cast: Node2D = $HookRayCast
-@export var hook = { "position": Vector2(), "is_hooked": false, "max_length": 500, "current_length": 0, "swing_speed": 1}
+@onready var animation: AnimatedSprite2D = $AnimatedSprite2D
+
+@export var hook = { "position": Vector2(), "is_hooked": false, "max_length": 500, "current_length": 0, "strength": 1}
 
 func _ready() -> void:
 	hook.current_length = hook.max_length
@@ -15,17 +23,47 @@ func _draw() -> void:
 	draw_hook()
 
 func handle_gravity():
-	if !is_on_floor():
+	if !is_on_floor() and velocity.y <= max_fall_speed:
 		velocity.y += gravity_force
 
-func handle_movement():
+func handle_jump(direction) -> void:
+	# Floor jump
+	if is_on_floor():
+		jump_height_timer.start()
+		velocity.y = jump_force
+		return;
+	
+	# Wall jump
+	if is_on_wall_only():
+		velocity.y = jump_force
+		velocity.x = -direction * speed
+		is_walljumping = true
+		wall_jump_timer.start()
+		return;
+	
+	# Mid air jump
+	if can_double_jump:
+		velocity.y = jump_force
+		can_double_jump = false
+		return;
+
+func handle_movement(delta):
 	# Handle left/right movement
 	var horizontal_direction = Input.get_axis("move_left", "move_right")
-	velocity.x = speed * horizontal_direction
+	
+	if !is_walljumping:
+		velocity.x = speed * horizontal_direction
+	
+	# Wall sliding
+	if is_on_wall_only():
+		velocity.y = wall_slide_speed * delta
 	
 	# Handle jump
+	if is_on_floor():
+		can_double_jump = true
+
 	if Input.is_action_just_pressed("jump"):
-		velocity.y = -jump_force
+		handle_jump(horizontal_direction)
 
 # Grappling Hook
 func draw_hook():
@@ -56,8 +94,6 @@ func handle_swing(delta):
 func handle_hook(delta: float):
 	hook_cast.look_at(get_global_mouse_position()) #Turn hook towards mouse
 	
-	
-	
 	if Input.is_action_just_pressed("grapple"):
 		hook.position = hook_cast.get_hook_position()
 		
@@ -70,13 +106,36 @@ func handle_hook(delta: float):
 	
 	if hook.is_hooked:
 		handle_swing(delta)
-		velocity *= hook.swing_speed #Determine swing speed
-	
+		velocity *= hook.strength #Determine how hard the hook will pull player in
 	queue_redraw()
+
+func handle_animation() -> void:
+	if velocity.length() > 0:
+		animation.animation = "walk"
+		animation.play()
+	else:
+		animation.animation = "default"
+		animation.stop()
+	
+	if velocity.x < 0:
+		animation.flip_h = true
+	else:
+		animation.flip_h = false
 
 func _physics_process(delta: float) -> void:
 	handle_gravity()
-	handle_movement()
+	handle_movement(delta)
 	handle_hook(delta)
+	handle_animation()
 	
 	move_and_slide()
+
+
+func _on_jump_height_timer_timeout() -> void:
+	if !Input.is_action_pressed("jump"):
+		if velocity.y < -100:
+			velocity.y = -100
+
+
+func _on_wall_jump_timer_timeout() -> void:
+	is_walljumping = false

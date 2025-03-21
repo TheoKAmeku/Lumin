@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://b008hhjvjp587"]
+
+[ext_resource type="PackedScene" uid="uid://c662v27l0g0e5" path="res://Scenes/player.tscn" id="1_5cjrv"]
+[ext_resource type="PackedScene" uid="uid://dljwtviq4rxnl" path="res://Scenes/falling_debris.tscn" id="2_gjpho"]
+[ext_resource type="PackedScene" uid="uid://ryqywekj6vkr" path="res://Scenes/platform.tscn" id="2_j0p05"]
+[ext_resource type="PackedScene" uid="uid://n0kywwyb33od" path="res://Scenes/moving_platform.tscn" id="3_5nsto"]
+
+[sub_resource type="Curve2D" id="Curve2D_5nsto"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1062, -1077)
+}
+point_count = 2
+
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_5cjrv")]
+position = Vector2(561, 305)
+
+[node name="Falling_Debris" parent="Player" instance=ExtResource("2_gjpho")]
+
+[node name="Platform" parent="." instance=ExtResource("2_j0p05")]
+position = Vector2(390, 528)
+
+[node name="Platform2" parent="." instance=ExtResource("2_j0p05")]
+position = Vector2(1372, 281)
+
+[node name="Platform3" parent="." instance=ExtResource("2_j0p05")]
+position = Vector2(1386, -547)
+rotation = 1.57065
+
+[node name="Moving_Platform" parent="." instance=ExtResource("3_5nsto")]
+curve = SubResource("Curve2D_5nsto")
+loop = false

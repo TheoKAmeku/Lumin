@@ -1,0 +1,110 @@
+[gd_scene load_steps=14 format=3 uid="uid://n0kywwyb33od"]
+
+[ext_resource type="Texture2D" uid="uid://p1strabrbydy" path="res://Assests/Platforms/Normal/Plat_1.png" id="1_06g8b"]
+[ext_resource type="Script" uid="uid://cxfuk8xblw700" path="res://Scripts/moving_platform.gd" id="1_130mj"]
+[ext_resource type="Texture2D" uid="uid://bxjgw2l8qivvb" path="res://Assests/Platforms/Normal/Plat_2.png" id="2_130mj"]
+[ext_resource type="Texture2D" uid="uid://c6bxweq2tsum8" path="res://Assests/Platforms/Normal/Plat_3.png" id="3_at2o6"]
+[ext_resource type="Texture2D" uid="uid://diwbrmp058uxn" path="res://Assests/Platforms/Normal/Plat_4.png" id="4_8bjry"]
+[ext_resource type="Texture2D" uid="uid://dgvn0on0lxvwy" path="res://Assests/Platforms/Normal/Plat_5.png" id="5_f6hav"]
+
+[sub_resource type="Curve2D" id="Curve2D_130mj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0)
+}
+point_count = 2
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_130mj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_06g8b"]
+size = Vector2(623, 169)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rttne"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_06g8b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_130mj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_at2o6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_8bjry")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_f6hav")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_06g8b"]
+resource_name = "move"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-1.66125, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_130mj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_at2o6"]
+_data = {
+&"RESET": SubResource("Animation_130mj"),
+&"move": SubResource("Animation_06g8b")
+}
+
+[node name="Moving_Platform" type="Path2D"]
+curve = SubResource("Curve2D_130mj")
+script = ExtResource("1_130mj")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(0.781909, 0)
+progress = 0.73605
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
+remote_path = NodePath("../../AnimatableBody2D")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+position = Vector2(0.781909, 0)
+physics_material_override = SubResource("PhysicsMaterial_130mj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(-18.9152, -17.5)
+shape = SubResource("RectangleShape2D_06g8b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatableBody2D"]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_rttne")
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../PathFollow2D/RemoteTransform2D")
+libraries = {
+&"": SubResource("AnimationLibrary_at2o6")
+}

@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var hook_length = 500
+@export var ray_count = 1
 
 func is_colliding() -> bool:
 	for raycast in get_children():
@@ -18,7 +19,7 @@ func _ready() -> void:
 	var current_angle = 0
 	var is_negative = true
 	
-	for n in range(1):
+	for n in range(ray_count):
 		var raycast = RayCast2D.new()
 		
 		raycast.target_position = Vector2(hook_length, 0)

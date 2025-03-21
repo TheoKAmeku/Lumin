@@ -1,17 +1,52 @@
-[gd_scene load_steps=3 format=3 uid="uid://ryqywekj6vkr"]
+[gd_scene load_steps=11 format=3 uid="uid://ryqywekj6vkr"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_xdow6"]
+[ext_resource type="Texture2D" uid="uid://p1strabrbydy" path="res://Assests/Platforms/Normal/Plat_1.png" id="1_1rc8e"]
+[ext_resource type="Script" uid="uid://dtex2l3tqtv1v" path="res://Scripts/platform.gd" id="1_uojju"]
+[ext_resource type="Texture2D" uid="uid://bxjgw2l8qivvb" path="res://Assests/Platforms/Normal/Plat_2.png" id="2_kul6x"]
+[ext_resource type="Texture2D" uid="uid://c6bxweq2tsum8" path="res://Assests/Platforms/Normal/Plat_3.png" id="3_uojju"]
+[ext_resource type="Texture2D" uid="uid://diwbrmp058uxn" path="res://Assests/Platforms/Normal/Plat_4.png" id="4_o24iv"]
+[ext_resource type="Texture2D" uid="uid://dgvn0on0lxvwy" path="res://Assests/Platforms/Normal/Plat_5.png" id="5_5g67m"]
+[ext_resource type="Texture2D" uid="uid://dp25kuxp33xf0" path="res://Assests/Platforms/Normal/Plat_6.png" id="7_o24iv"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o24iv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1rc8e"]
-size = Vector2(849, 95)
+size = Vector2(613, 162)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n5262"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1rc8e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_kul6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_uojju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_o24iv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5g67m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_o24iv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
 
 [node name="Platform" type="StaticBody2D"]
-
-[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-position = Vector2(421.75, 45.25)
-scale = Vector2(844.5, 91.5)
-mesh = SubResource("QuadMesh_xdow6")
+physics_material_override = SubResource("PhysicsMaterial_o24iv")
+script = ExtResource("1_uojju")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(423.5, 46.5)
+position = Vector2(-18.5, -17)
 shape = SubResource("RectangleShape2D_1rc8e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_n5262")

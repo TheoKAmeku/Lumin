@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0nstvox88jvr"
-path="res://.godot/imported/enemySwimming_2.png-ded5a9193d21d84efe27f6d0af271724.ctex"
+uid="uid://byd50gq5ynvue"
+path="res://.godot/imported/D_2.png-93c9bf07dd350e56046552b04544444d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assests/art/enemySwimming_2.png"
-dest_files=["res://.godot/imported/enemySwimming_2.png-ded5a9193d21d84efe27f6d0af271724.ctex"]
+source_file="res://Assests/Debris/D_2.png"
+dest_files=["res://.godot/imported/D_2.png-93c9bf07dd350e56046552b04544444d.ctex"]
 
 [params]
 

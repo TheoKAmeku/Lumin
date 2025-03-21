@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c350mk68j27n7" path="res://Scripts/player.gd" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://y80k3hiol4hq" path="res://Assests/art/playerGrey_walk1.png" id="1_v7yw2"]
 [ext_resource type="Texture2D" uid="uid://dm4gufakstww6" path="res://Assests/art/playerGrey_walk2.png" id="2_5upm3"]
-[ext_resource type="Script" uid="uid://cknkdxdydpieg" path="res://Scripts/GrapplingCast.gd" id="4_vgqql"]
+[ext_resource type="Script" uid="uid://cknkdxdydpieg" path="res://Scripts/hook_raycast.gd" id="4_vgqql"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wxjh7"]
 animations = [{
@@ -28,12 +28,11 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u7hfh"]
-radius = 28.0
-height = 70.0
+radius = 27.0
+height = 68.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_6t5aa")
-jump_force = 1000
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -48,7 +47,15 @@ shape = SubResource("CapsuleShape2D_u7hfh")
 position = Vector2(0, -86)
 
 [node name="HookRayCast" type="Node2D" parent="."]
-position = Vector2(50, 0)
-rotation = -1.5708
 script = ExtResource("4_vgqql")
-hook_length = 1000
+
+[node name="JumpHeightTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
+
+[node name="WallJumpTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="JumpHeightTimer" to="." method="_on_jump_height_timer_timeout"]
+[connection signal="timeout" from="WallJumpTimer" to="." method="_on_wall_jump_timer_timeout"]
