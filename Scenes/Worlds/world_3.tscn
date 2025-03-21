@@ -40,10 +40,10 @@ position = Vector2(2823, 14)
 position = Vector2(2805, -595)
 
 [node name="Platform10" parent="." instance=ExtResource("2_q7yqv")]
-position = Vector2(1838, -917)
+position = Vector2(1749, -971)
 
 [node name="Platform11" parent="." instance=ExtResource("2_q7yqv")]
-position = Vector2(763, -944)
+position = Vector2(638, -631)
 
 [node name="WinEntity" parent="." instance=ExtResource("3_q7yqv")]
 position = Vector2(5, -234)
